@@ -1,5 +1,6 @@
 /index.php
 /public/index.php
+.env
 
 # Ignore npm debug log files
 npm-debug.log*

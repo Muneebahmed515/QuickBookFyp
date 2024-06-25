@@ -5,15 +5,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/hello', function () {
-    return response()->json(['message' => 'Hello World']);
+    return response()->json(['status'=> true, 'code' => 200, 'message' => 'Hello World', 'data' => []]);
 });
 
-Route::get('/test-db', function (Request $request) {
+Route::get('/ping', function (Request $request) {
     try {
         DB::connection()->getPdo();
-        return response()->json(['message' => 'Database connection successfully established.']);
+        return response()->json(['status'=> true, 'code' => 200, 'message' => 'Database connection successfully established.', 'data' => []]);
     } catch (\Exception $e) {
-        return response()->json(['message' => 'Failed to connect to the database: ' . $e->getMessage()], 500);
+        return response()->json(['status'=> false, 'code' => 500, 'message' => 'Failed to connect to the database: ' . $e->getMessage(), 'data' => []], 500);
     }
 });
 

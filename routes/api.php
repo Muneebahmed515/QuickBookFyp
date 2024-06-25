@@ -17,6 +17,10 @@ Route::get('/ping', function (Request $request) {
     }
 });
 
+Route::get('/world', function (Request $request) {
+    return response()->json(['message' => 'uzair is live']);
+});
+
 Route::get('/test-db', function (Request $request) {
     try {
         DB::connection()->getPdo();

@@ -10,6 +10,7 @@ Route::get('/hello', function () {
 });
 
 Route::post('signup', [AuthController::class, 'signup']);
+Route::post('login', [AuthController::class, 'login']);
 
 Route::get('/ping', function (Request $request) {
     try {

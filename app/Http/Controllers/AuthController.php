@@ -42,12 +42,49 @@ class AuthController extends Controller
         ]);
 
         // Return the created user
-        // Return the created user
         return response()->json([
             'status' => true,
             'code' => 201,
             'message' => 'Signup Successful',
             'data' => $user
         ], 201);
+    }
+
+
+    public function login(Request $request)
+    {
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'code' => 422,
+                'message' => 'Validation Error',
+                'data' => $validator->errors()
+            ], 422);
+        }
+
+        // Check credentials manually
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && $user->password === $request->password) {
+            return response()->json([
+                'status' => true,
+                'code' => 200,
+                'message' => 'Login Successful',
+                'data' => $user
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'code' => 401,
+                'message' => 'Invalid Credentials',
+                'data' => null
+            ], 401);
+        }
     }
 }

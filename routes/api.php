@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 Route::get('/hello', function () {
     return response()->json(['status'=> true, 'code' => 200, 'message' => 'Hello World', 'data' => []]);
@@ -11,6 +12,7 @@ Route::get('/hello', function () {
 
 Route::post('signup', [AuthController::class, 'signup']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('getUserByEmail', [UserController::class, 'getUserByEmail']);
 
 Route::get('/ping', function (Request $request) {
     try {
